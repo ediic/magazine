@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Uploads{% endblock %}
+
+{% block body %}
+    <h1>Create new Uploads</h1>
+
+    {{ include('uploads/_form.html.twig') }}
+
+    <a href="{{ path('uploads_index') }}">back to list</a>
+{% endblock %}

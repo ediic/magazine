@@ -20,7 +20,7 @@
 </div>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="{{ path('home') }}">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -37,12 +37,18 @@
       </li>    
     </ul>
     <ul class="nav navbar-nav ml-auto">
-      <li class="nav-item">
-      	<a class="nav-link" href="#"><i class="fas fa-sign-in-alt"></i> Login</a>
-      </li>
-      <li class="nav-item">
-      	<a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
-      </li>
+      {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('uploads_index') }}">Arata lista</a>
+        </li>  
+       <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        </li>  
+      {% else %}
+        <li class="nav-item">
+        	<a class="nav-link" href="{{ path('app_login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+        </li>
+      {% endif %}
     </ul>
   </div>  
 </nav>
@@ -51,14 +57,6 @@
 {% block body %}
 
 {% endblock %}
-
-<footer class="container-fluid text-center">
-  <p>Online Store Copyright</p>  
-  <form class="form-inline">Get deals:
-    <input type="email" class="form-control" size="50" placeholder="Email Address">
-    <button type="button" class="btn btn-danger">Sign Up</button>
-  </form>
-</footer>
 
 {% block javascripts %}
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
